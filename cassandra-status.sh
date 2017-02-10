@@ -2,7 +2,7 @@
 #
 # Output Cassandra cluster and pod status
 
-find_cassandra_pods="kubectl get pods -l name=cassandra"
+find_cassandra_pods="kubectl get pods -l name=zytest-cassandra"
 
 first_running_seed=$($find_cassandra_pods --no-headers | \
     grep Running | \
