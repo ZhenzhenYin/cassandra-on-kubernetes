@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: cassandra
-  name: cassandra
+    name: zytest-cassandra
+  name: zytest-cassandra
 spec:
   ports:
     - port: 9042
       name: cql
   selector:
-    name: cassandra
+    name: zytest-cassandra
 

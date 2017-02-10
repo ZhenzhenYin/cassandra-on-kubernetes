@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: zytest-cassandra
+  name: zytest-cassandra
+spec:
+  replicas: 2
+  selector:
+    name: zytest-cassandra
+  template:
+    metadata:
+      labels:
+        name: zytest-cassandra
+    spec:
+      containers:
+        - image: zzyin/cassandra:latest
+          name: zytest-cassandra
+          env:
+            - name: PEER_DISCOVERY_SERVICE
+              value: zytest-cassandra-peers
+
+            # Feel free to change the following:
+            - name: CASSANDRA_CLUSTER_NAME
+              value: zytest-Cassandra
+            - name: CASSANDRA_DC
+              value: DC1
+            - name: CASSANDRA_RACK
+              value: zytest-Kubernetes Cluster
+            - name: CASSANDRA_ENDPOINT_SNITCH
+              value: GossipingPropertyFileSnitch
+            - name: DEPLOY_ENV
+              value: test
+          ports:
+            - containerPort: 9042
+              name: cql
+          volumeMounts:
+            - mountPath: /var/lib/cassandra/data
+              name: data
+      volumes:
+        - name: data
+          emptyDir: {}
+
